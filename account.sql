@@ -1,28 +1,37 @@
+PRAGMA foreign_keys = ON;
+DROP TABLE IF EXISTS funds;
 DROP TABLE IF EXISTS account;
-DROP TABLE IF EXISTS expense;
-DROP TABLE IF EXISTS income;
 
 CREATE TABLE account (
-    id INTEGER,
+    id INTEGER PRIMARY KEY,
+    account_num INTEGER,
+    bank TEXT
+);
+
+CREATE TABLE funds (
+    id INTEGER PRIMARY KEY,
     type INTEGER,
-    name VARCHAR(20),
-    last_payment_balance REAL DEFAULT 0.0,
-    due_day INTEGER,  
-    PRIMARY KEY(id)
+    description TEXT DEFAULT "Food",
+    balance REAL DEFAULT 0.0,
+    date DATE,
+    amount REAL,
+    account INTEGER,
+    payment TEXT,
+    FOREIGN KEY (account) REFERENCES account (account_num)
 );
 
-CREATE TABLE expense (
-    name VARCHAR(20),
-    payment_account_id INT,
-    FOREIGN KEY (payment_account_id) REFERENCES account(id) ON DELETE SET NULL
-);
 
-CREATE TABLE income (
-    name VARCHAR(20),
-    deposit_account_id INT,
-    FOREIGN KEY (deposit_account_id) REFERENCES account(id) ON DELETE SET NULL
-);
+INSERT into account (account_num, bank) VALUES (3322,"TCF");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Cash");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Cash");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Debit");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Cash");
 
-INSERT INTO account (id, type, name) VALUES (4042, 1, "Mike");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Cash");
+DELETE from funds WHERE payment = "Debit";
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Credit");
+INSERT into funds (type, date, amount, account, payment) VALUES (1, "9/2", 12.21, 3322, "Credit");
+
+
+SELECT * FROM funds;
 SELECT * FROM account;
-
