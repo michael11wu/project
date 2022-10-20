@@ -1,0 +1,4 @@
+#Mon Jul 11 21:16:08 CDT 2022
+base.0=C\:\\Users\\micha\\project_files\\finance_app\\build\\app\\intermediates\\dex\\debug\\mergeDexDebug\\classes.dex
+path.0=classes.dex
+renamed.0=classes.dex
